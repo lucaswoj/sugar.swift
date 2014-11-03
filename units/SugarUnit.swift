@@ -22,10 +22,6 @@ final class SugarUnit<Type:SugarUnitType>:SugarSerializable {
         return all.find({unit in return unit.isStandard})!
     }
 
-    class var preferred:SugarUnit<Type> {
-        return get(Sugar.instance.settings.preferredUnits[Type.name] ?? standard.name)!
-    }
-
     let name:String
     let abbreviation:String
     let multiplier:Double // Multiplier is this unit per standard unit

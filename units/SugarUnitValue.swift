@@ -70,10 +70,6 @@ class SugarUnitValue<Type:SugarUnitType>:SugarSerializable,Comparable {
         return asUnit(SugarUnit<Type>.standard)
     }
 
-    var asPreferredUnit:SugarUnitValue<Type> {
-        return asUnit(SugarUnit<Type>.preferred)
-    }
-
     var standardValue:Double {
         return asStandardUnit.value
     }
@@ -102,8 +98,7 @@ class SugarUnitValue<Type:SugarUnitType>:SugarSerializable,Comparable {
     }
 
     func asString(significantDigits:Int? = nil, fractionDigits:Int? = nil, unit:String? = nil) -> String {
-        let preferred = unit != nil ? asUnit(unit!) : self.asPreferredUnit
-
+        
         let formatter = NSNumberFormatter()
         formatter.locale = NSLocale.currentLocale()
         formatter.usesGroupingSeparator = true
@@ -116,7 +111,7 @@ class SugarUnitValue<Type:SugarUnitType>:SugarSerializable,Comparable {
             formatter.maximumFractionDigits = fractionDigits!
         }
 
-        return formatter.stringFromNumber(preferred.value)! + " " + preferred.unit.abbreviation
+        return formatter.stringFromNumber(self.value)! + " " + self.unit.abbreviation
     }
 
 }
